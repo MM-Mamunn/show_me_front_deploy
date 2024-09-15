@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import Home from "./pages/home/Home";
-import Friends from "./pages/home/friend";
+import Friends from "./pages/home/Friend";
 
 function App() {
   const isLoggedIn = () => {
@@ -23,7 +23,6 @@ function App() {
       localStorage.setItem("user", "9999");
       return 0;
     }
-    
   };
 
   // useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
   //     localStorage.setItem("secret", "9999");
   //   }
   // }, []);
-  
+
   return (
     <>
       <div>
@@ -43,20 +42,19 @@ function App() {
               <Route path="/frnds" element={<Friends />} />
               <Route path="/" element={<Home />} />
 
-
               {/* <Route path= "/login" element={isLoggedIn()?<Login /> : <Navigate to="/signup" />} /> */}
             </Routes>
           </BrowserRouter>
         ) : (
           <BrowserRouter>
-          <Routes>
-          <Route path="/" element={<Signup />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Routes>
+              <Route path="/" element={<Signup />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
 
-            {/* <Route path= "/login" element={isLoggedIn()?<Login /> : <Navigate to="/signup" />} /> */}
-          </Routes>
-        </BrowserRouter>
+              {/* <Route path= "/login" element={isLoggedIn()?<Login /> : <Navigate to="/signup" />} /> */}
+            </Routes>
+          </BrowserRouter>
         )}
       </div>
     </>
