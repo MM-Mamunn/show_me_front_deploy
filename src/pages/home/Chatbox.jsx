@@ -38,7 +38,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   }, [scrollRef, all]);
 
   const refreshcontinious = async () => {
-    await delay(100);
+    await delay(1000);
     await fetchall();
     if (refresh > 0) setrefresh(0);
     else setrefresh(refresh + 1);
@@ -54,7 +54,6 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   const fetchall = async () => {
     let user = localStorage.getItem("user");
     console.log("chatfriendd", chatFriend);
-
     let a = {
       from: user,
       to: chatFriend,
@@ -95,7 +94,6 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
 
       let objectfind =
         storedarray.filter((item) => item.name == chatFriend) || [];
-
       if (objectfind.length) {
         sethash(objectfind[0].code);
 
@@ -151,7 +149,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
       existinarray = JSON.parse(localStorage.getItem("secret")) || [];
     existinarray.push(newobject);
     localStorage.setItem("secret", JSON.stringify(existinarray));
-
+    await delay(200);
     const temp = parseInt(code, 10);
     sethash(2);
     fetchall();
