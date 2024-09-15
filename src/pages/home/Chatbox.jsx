@@ -6,7 +6,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   const [all, setall] = useState([]);
   const [hash, sethash] = useState(0);
   const [code, setcode] = useState(0);
-  const [refresh, setrefresh] = useState(0)
+  const [refresh, setrefresh] = useState(0);
   const scrollRef = useRef(null);
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,26 +33,23 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
       .join("");
   }
   useEffect(() => {
-    if(!scrollRef.current || !all.length || hash == -1)
-      return;
-    scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight )
-  }, [scrollRef,all])
-  
+    if (!scrollRef.current || !all.length || hash == -1) return;
+    scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
+  }, [scrollRef, all]);
+
   const refreshcontinious = async () => {
     await delay(100);
     await fetchall();
-    if(refresh > 0)
-      setrefresh(0);
-    else 
-    setrefresh(refresh + 1);
-  }
+    if (refresh > 0) setrefresh(0);
+    else setrefresh(refresh + 1);
+  };
   function removeKey(array, keyToRemove) {
-    return array.map(obj => {
-        // Create a shallow copy of the object
-        const { [keyToRemove]: _, ...newObj } = obj;
-        return newObj;
+    return array.map((obj) => {
+      // Create a shallow copy of the object
+      const { [keyToRemove]: _, ...newObj } = obj;
+      return newObj;
     });
-}
+  }
 
   const fetchall = async () => {
     let user = localStorage.getItem("user");
@@ -63,7 +60,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
       to: chatFriend,
     };
     await delay(100);
-    let b = await fetch("http://localhost:3000/api/msg/all/", {
+    let b = await fetch("https://show-me-back-deploy.vercel.app/api/msg/all/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,14 +73,14 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
       let recoveredString = recoverString(b[i].text, xx);
       b[i].text = recoveredString;
     }
-    
-    const filteredB = removeKey(b, "updatedAt");
-const filteredAll = removeKey(all, "updatedAt");
 
-if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
-    return;
-}
-    
+    const filteredB = removeKey(b, "updatedAt");
+    const filteredAll = removeKey(all, "updatedAt");
+
+    if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
+      return;
+    }
+
     setall(b);
     setsharedstate(sharedstate + 1);
   };
@@ -101,7 +98,7 @@ if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
 
       if (objectfind.length) {
         sethash(objectfind[0].code);
-       
+
         fetchall();
       } else {
         sethash(-1);
@@ -109,7 +106,7 @@ if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
     }
     refreshcontinious();
     setsharedstate(sharedstate + 1);
-  }, [chatFriend, hash,refresh]);
+  }, [chatFriend, hash, refresh]);
 
   const handleChange = (e) => {
     settext(e.target.value);
@@ -171,7 +168,7 @@ if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
       to: chatFriend,
       text: shiftedString,
     };
-    let b = await fetch("http://localhost:3000/api/msg/new/", {
+    let b = await fetch("https://show-me-back-deploy.vercel.app/api/msg/new/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +212,6 @@ if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
       )}
       {hash != -1 && (
         <div className=" flex flex-col ">
-
           <div
             ref={scrollRef}
             className="scrl overflow-y-scroll no-scroll scrollbar-thin scrollbar-thumb-blue-700  scrollbar-track-gray-200  h-[77vh] box border-2 w-full "

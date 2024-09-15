@@ -12,7 +12,7 @@ function Friends() {
       console.log(user);
 
       let response = await fetch(
-        `http://localhost:3000/api/frnd/frnds/${user}`
+        `https://show-me-back-deploy.vercel.app/api/frnd/frnds/${user}`
       );
       let data = await response.json();
       setFriends(data);
@@ -33,16 +33,21 @@ function Friends() {
       userName1: user,
       userName2: searchbox,
     };
-    let b = await fetch("http://localhost:3000/api/frnd/new/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(a),
-    });
+    let b = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/frnd/new/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(a),
+      }
+    );
     b = await b.json();
 
-    let response = await fetch(`http://localhost:3000/api/frnd/frnds/${user}`);
+    let response = await fetch(
+      `https://show-me-back-deploy.vercel.app/api/frnd/frnds/${user}`
+    );
     let data = await response.json();
     setFriends(data);
     setsearchbox("");
@@ -59,13 +64,16 @@ function Friends() {
       userName: searchbox,
     };
 
-    let b = await fetch("http://localhost:3000/api/signup/usercheck/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(a),
-    });
+    let b = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/usercheck/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(a),
+      }
+    );
     b = await b.json();
     console.log(b.message);
 
@@ -77,14 +85,14 @@ function Friends() {
 
   return (
     <>
-    <Nav1 />
+      <Nav1 />
       <div className="bg-blue-50 m-0 p-2 h-[88vh]">
         <div className="flex justify-around m-2">
           <div className="container border-2 border-blue-950 max-w-[50vw] m-3 bg-blue-300  pt-[60px] rounded-3xl">
             <div className="flex justify-center items-center ">
               <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
                 <div className="inputs flex flex-col justify-center gap-2 items-center">
-                    <h2 className="font-bold text-slate-700">Search User</h2>
+                  <h2 className="font-bold text-slate-700">Search User</h2>
                   <input
                     name="Search"
                     value={searchbox}
@@ -93,17 +101,17 @@ function Friends() {
                     placeholder="Search"
                     className="mx-2 px-1 min-h-[70px] min-w-[400px] my-1 bg-white rounded-2xl"
                   />
-                   {searchbox.length < 5 ? (
-                searchbox.length >= 1 ? (
-                  <div className="text-[14px] font-bold ml-[6vw] text-red-600 ">
-                    {5 - searchbox.length} more characters needed minimum
-                  </div>
-                ) : (
-                  ""
-                )
-              ) : (
-                ""
-              )}
+                  {searchbox.length < 5 ? (
+                    searchbox.length >= 1 ? (
+                      <div className="text-[14px] font-bold ml-[6vw] text-red-600 ">
+                        {5 - searchbox.length} more characters needed minimum
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
                   <button
                     className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
                     onClick={handleSearch}
@@ -161,7 +169,11 @@ function Friends() {
                     <div className="line mr-[9px] ml-[75px] min-w-[5vw] mb-[2px] border-2 border-blue-950"></div>
                   </div>
                 ))}
-                {!friends.length && <div className="font-bold text-3xl opacity-30 text-blue-900">No Friend Yet</div>}
+                {!friends.length && (
+                  <div className="font-bold text-3xl opacity-30 text-blue-900">
+                    No Friend Yet
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -9,13 +9,16 @@ function Signup() {
   };
 
   const handleSignup = async (e) => {
-    let b = await fetch("http://localhost:3000/api/signup/usercheck/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    let b = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/usercheck/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
     b = await b.json();
     console.log(b.message);
 
@@ -24,13 +27,16 @@ function Signup() {
       return;
     }
 
-    let a = await fetch("http://localhost:3000/api/signup/new/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    let a = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/new/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
     a = await a.json();
     if (a) {
       setform({ userName: "", password: "" });

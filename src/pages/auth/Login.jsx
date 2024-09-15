@@ -14,24 +14,25 @@ function Login() {
     const newValue = e.target.value;
 
     // Only allow empty string or integer numbers
-    if (newValue === '' || /^[0-9]+$/.test(newValue)) {
+    if (newValue === "" || /^[0-9]+$/.test(newValue)) {
       sethash(newValue);
     }
-    
   };
 
-
   const handleLogin = async (e) => {
-    let b = await fetch("http://localhost:3000/api/signup/login/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    let b = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/login/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
     b = await b.json();
     console.log(b.message);
-    
+
     if (b.message == 0) {
       alert("Invalid Username or password");
       return;
@@ -98,7 +99,7 @@ function Login() {
               <button
                 className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
                 onClick={handleLogin}
-                disabled={form.userName.length < 5 || form.password.length < 5 }
+                disabled={form.userName.length < 5 || form.password.length < 5}
                 // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
               >
                 Log in
