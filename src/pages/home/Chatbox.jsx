@@ -79,7 +79,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
     if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
       return;
     }
-
+    await delay(200);
     setall(b);
     setsharedstate(sharedstate + 1);
   };
