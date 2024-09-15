@@ -13,23 +13,9 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   }
   ///decode
   function recoverString(str, n) {
-    const shiftCharBackward = (char, n, start) => {
-      const charCode = char.charCodeAt(0);
-      const newCharCode = ((charCode - start - n + 26) % 26) + start;
-      return String.fromCharCode(newCharCode);
-    };
-
     return str
       .split("")
-      .map((char) => {
-        if (char >= "A" && char <= "Z") {
-          return shiftCharBackward(char, n, 65);
-        } else if (char >= "a" && char <= "z") {
-          return shiftCharBackward(char, n, 97);
-        } else {
-          return char;
-        }
-      })
+      .map((char) => String.fromCharCode(char.charCodeAt(0) - (n % 50)))
       .join("");
   }
   useEffect(() => {
@@ -79,7 +65,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
     if (JSON.stringify(filteredB) === JSON.stringify(filteredAll)) {
       return;
     }
-    await delay(700);
+    await delay(100);
     setall(b);
     setsharedstate(sharedstate + 1);
   };
@@ -112,23 +98,9 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   };
 
   function shiftString(str, n) {
-    const shiftCharForward = (char, n, start) => {
-      const charCode = char.charCodeAt(0);
-      const newCharCode = ((charCode - start + n) % 26) + start;
-      return String.fromCharCode(newCharCode);
-    };
-
     return str
       .split("")
-      .map((char) => {
-        if (char >= "A" && char <= "Z") {
-          return shiftCharForward(char, n, 65);
-        } else if (char >= "a" && char <= "z") {
-          return shiftCharForward(char, n, 97);
-        } else {
-          return char;
-        }
-      })
+      .map((char) => String.fromCharCode(char.charCodeAt(0) + (n % 50)))
       .join("");
   }
   const handleChange2 = (e) => {
@@ -149,7 +121,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
       existinarray = JSON.parse(localStorage.getItem("secret")) || [];
     existinarray.push(newobject);
     localStorage.setItem("secret", JSON.stringify(existinarray));
-    await delay(200);
+
     const temp = parseInt(code, 10);
     sethash(2);
     fetchall();
