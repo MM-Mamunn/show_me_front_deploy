@@ -66,13 +66,16 @@ function Friends() {
       userName2: user,
     };
 
-    let b2 = await fetch("http://localhost:3000/api/frnd/frndcheck/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(a2),
-    });
+    let b2 = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/frnd/frndcheck/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(a2),
+      }
+    );
     b2 = await b2.json();
     console.log(b2);
 
