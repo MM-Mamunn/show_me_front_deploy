@@ -27,7 +27,8 @@ function Friends() {
   };
   const handleAdd = async () => {
     console.log("clicked");
-
+    setsearchbox("");
+    setfound(-1);
     let user = localStorage.getItem("user");
     let a = {
       userName1: user,
