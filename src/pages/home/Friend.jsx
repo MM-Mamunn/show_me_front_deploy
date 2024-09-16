@@ -99,7 +99,7 @@ function Friends() {
       }
     );
     b = await b.json();
-    console.log(b.message);
+    console.log(b);
 
     if (b.message == 1) {
       setfound(1);
