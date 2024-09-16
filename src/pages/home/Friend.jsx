@@ -174,30 +174,32 @@ function Friends() {
           <div className="line min-h-[25vh]  border-2 border-blue-800"></div>
           <div className="extra">
             <div className="pt-3">
-              <div className="container  pb-[100px]  min-h-[80vh] min-w-[20vw] max-w-[40vw]  bg-blue-300 rounded-3xl p-2">
+              <div className="container  min-h-[80vh] min-w-[20vw] max-w-[40vw]  bg-blue-300 rounded-3xl px-2">
                 <h2 className="text-blue-900 font-bold ml-5">Friends</h2>
                 <div className="line  m-2 border-2 border-black"></div>
-                {friends?.map((item, index) => (
-                  <div>
-                    <div className="flex">
-                      <div
-                        key={index}
-                        className="circle h-[50px] w-[50px] text-center bg-green-900 text-white rounded-full p-1"
-                      >
-                        {index + 1}
+                <div className="scrl h-[68vh]  overflow-y-scroll no-scroll scrollbar-thin scrollbar-thumb-blue-700  scrollbar-track-gray-200">
+                  {friends?.map((item, index) => (
+                    <div>
+                      <div className="flex">
+                        <div
+                          key={index}
+                          className="circle h-[50px] w-[50px] text-center bg-green-900 text-white rounded-full p-1"
+                        >
+                          {index + 1}
+                        </div>
+                        <button className="btn truncate  ml-2 bg-blue-800 text-white font-serif font-bold w-[20vw] m-auto rounded-lg p-2 ">
+                          {item._doc.userName2}
+                        </button>
                       </div>
-                      <button className="btn truncate  ml-2 bg-blue-800 text-white font-serif font-bold w-[20vw] m-auto rounded-lg p-2 ">
-                        {item._doc.userName2}
-                      </button>
+                      <div className="line mr-[9px] ml-[75px] min-w-[5vw] mb-[2px] border-2 border-blue-950"></div>
                     </div>
-                    <div className="line mr-[9px] ml-[75px] min-w-[5vw] mb-[2px] border-2 border-blue-950"></div>
-                  </div>
-                ))}
-                {!friends.length && (
-                  <div className="font-bold text-3xl opacity-30 text-blue-900">
-                    No Friend Yet
-                  </div>
-                )}
+                  ))}
+                  {!friends.length && (
+                    <div className="font-bold text-3xl opacity-30 text-blue-900">
+                      No Friend Yet
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

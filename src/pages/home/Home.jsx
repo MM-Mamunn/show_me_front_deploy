@@ -41,7 +41,7 @@ function Home() {
     <div className="h-[100vh] bg-blue-100">
       <Nav1 />
       <div className="container flex h-[79vh] ">
-        <div className="side py-2  bg-blue-300 flex flex-col gap-2  items-center min-w-[20vw] h-[88.5vh] border-x-2 border-blue-950">
+        <div className="side  overflow-y-scroll overflow-x-hidden no-scroll scrollbar-thin scrollbar-thumb-blue-700  scrollbar-track-gray-200 py-2  bg-blue-300 flex flex-col gap-2  items-center min-w-[20vw] h-[88.5vh] border-x-2 border-blue-950">
           {friends?.map((item, index) => (
             <div key={index}>
               <button
