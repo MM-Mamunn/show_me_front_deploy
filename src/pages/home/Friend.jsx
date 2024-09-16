@@ -60,6 +60,27 @@ function Friends() {
       setfound(0);
       return;
     }
+    ///check already frnds or not
+    let a2 = {
+      userName1: searchbox,
+      userName2: user,
+    };
+
+    let b2 = await fetch("http://localhost:3000/api/frnd/frndcheck/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(a2),
+    });
+    b2 = await b2.json();
+    console.log(b2);
+
+    if (b2.message == 1) {
+      alert("Already Friends");
+      return;
+    }
+
     let a = {
       userName: searchbox,
     };
