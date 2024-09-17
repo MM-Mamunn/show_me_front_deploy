@@ -153,11 +153,11 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   return (
     <>
       {hash == -1 && (
-        <div className="pt-[70px] min-h-[99vh] bg-blue-50">
-          <div className="flex justify-center items-center container max-w-[50vw] h-[63vh] bg-blue-300 m-auto p-3 rounded-3xl">
+        <div className="pt-[70px] min-h-[99vh]  bg-blue-50">
+          <div className="flex justify-center items-center container max-w-[70vw]  lg:max-w-[50vw] h-[50vh] lg:h-[63vh] bg-blue-300 m-auto p-3 rounded-3xl">
             <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
               <div className="inputs flex flex-col justify-center gap-2 items-center">
-                <div className="msg font-bold bg-blue-400 text-blue-900 text-center rounded-lg break-words  p-2 w-[20vw]">
+                <div className="msg font-bold bg-blue-400  break-words h-[20vh] text-blue-900 text-center rounded-lg overflow-y-scroll  lg:p-2 w-[40vw] lg:w-[20vw]">
                   Enter the secret Key between you and {chatFriend}
                 </div>
                 <input
@@ -166,7 +166,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
                   value={code}
                   onChange={handleChange2}
                   placeholder="Enter an integer secret key"
-                  className="mx-2 px-1 min-h-[70px] min-w-[400px] my-1 bg-white rounded-2xl"
+                  className="mx-2 px-[2px] lg:px-1 min-h-[70px] max-w-[200px] lg:min-w-[400px] my-1 bg-white rounded-2xl"
                 />
                 <button
                   className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
