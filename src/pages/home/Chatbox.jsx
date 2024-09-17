@@ -152,7 +152,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   };
   return (
     <>
-      {hash == -1 && (
+     {hash == -1 && (
         <div className="pt-[70px] min-h-[99vh]  bg-blue-50">
           <div className="flex justify-center items-center container max-w-[70vw]  lg:max-w-[50vw] h-[50vh] lg:h-[63vh] bg-blue-300 m-auto p-3 rounded-3xl">
             <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
@@ -202,7 +202,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
                   }
                 >
                   {item.text}
-                  <div className="date pl-[340px] opacity-40 text-black text-[20px]">
+                  <div className="date pt-2 lg:pl-[340px] opacity-40 text-black text-[20px]">
                     {item.createdAt}
                   </div>
                 </div>
@@ -222,7 +222,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
                 onChange={handleChange}
                 type="text"
                 placeholder="text"
-                className="mx-3 px-2 min-h-[70px] min-w-[70vw]  bg-white rounded-2xl"
+                className=" mx-[2px] w-[60vw] lg:mx-3 px-2 min-h-[70px] lg:min-w-[70vw]  bg-white rounded-2xl"
               />
               <button
                 className=" font  w-[70px] h-[70px] p-1 rounded-full flex justify-center items-center text-white px-2 py-1 disabled:bg-blue-900  bg-blue-600"

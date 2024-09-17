@@ -18,7 +18,7 @@ function Nav1() {
   };
   return (
     <>
-       <div className="nav p-2 bg-blue-950 text-white flex justify-between pl-7">
+        <div className="nav p-2 bg-blue-950 text-white flex justify-between pl-7">
         <div className="logo">
           <span className="font-bold text-xl text-red-600">&lt;Show</span>
           <span className="font-bold text-xl text-green-600"> Me/&gt; </span>
@@ -155,7 +155,7 @@ function Nav1() {
             ))}
           {localStorage.getItem("user") &&
             localStorage.getItem("user") != "9999" && (
-              <div className="flex gap-1 justify-center items-center bg-blue-900 text-white font-bold p-1 py-[6px]  w-auto rounded-full  bottom-1 left-1 fixed text-center   px-[10px] hover:bg-blue-800">
+              <div className="flex gap-1 justify-center items-center bg-blue-900 text-white font-bold p-1 py-[6px]  w-auto rounded-full top-[94vh] lg:bottom-1 left-1 fixed text-center   px-[10px] hover:bg-blue-800">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
