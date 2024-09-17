@@ -45,10 +45,11 @@ function Login() {
   };
   return (
     <>
-      <Nav1 />
+     <Nav1 />
       <div className="pt-[70px] min-h-[99vh] bg-blue-50">
-        <div className="flex justify-center items-center container max-w-[50vw] h-[60vh] bg-blue-300 m-auto p-3 rounded-3xl">
-          <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
+      <div className=" flex justify-center items-center container max-w-[99vw] px-1 lg:max-w-[50vw] h-[60vh] bg-blue-300 m-auto lg:p-3 rounded-3xl">
+
+      <div className="container2 bg-blue-200 py-4 px-1 lg:px-2 lg:w-[30vw] w-[90vw] inline-block rounded-2xl">
             <div className="inputs flex flex-col justify-center gap-2 items-center">
               <input
                 name="userName"
@@ -56,7 +57,7 @@ function Login() {
                 onChange={handleChange}
                 type="text"
                 placeholder="Username"
-                className="mx-2 px-1 min-h-[70px] min-w-[400px] my-1 bg-white rounded-2xl"
+                className="mx-2 px-1 min-h-[70px] lg:min-w-[400px] my-1 bg-white rounded-2xl"
               />
               {form.userName.length < 5 ? (
                 form.userName.length >= 1 ? (
@@ -75,7 +76,7 @@ function Login() {
                 onChange={handleChange}
                 type="text"
                 placeholder="Password"
-                className="mx-2 px-1 min-h-[70px] min-w-[400px] my-1 bg-white rounded-2xl"
+                className="mx-2 px-1 min-h-[70px] lg:min-w-[400px] my-1 bg-white rounded-2xl"
               />
               {form.password.length < 5 ? (
                 form.password.length >= 1 ? (
@@ -99,7 +100,7 @@ function Login() {
               <button
                 className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
                 onClick={handleLogin}
-                disabled={form.userName.length < 5 || form.password.length < 5}
+                disabled={form.userName.length < 5 || form.password.length < 5 }
                 // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
               >
                 Log in
