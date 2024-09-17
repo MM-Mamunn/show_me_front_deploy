@@ -45,7 +45,7 @@ function Home() {
               {friends?.map((item, index) => (
                   <div key={index}>
                     <button  onClick={(e) => handleClick(e, item._doc.userName2)}
-                    className={chatFriend == item._doc.userName2?"btn flex  hover:text-green-300 truncate justify-center lg:w-[300px] w-[80px]  p-1 px-1 rounded-2xl bg-blue-950 font-bold text-white ":"btn flex justify-center truncate hover:text-green-300 lg:w-[300px] w-[80px] p-1 px-2 rounded-2xl bg-blue-900 text-white "
+                    className={chatFriend == item._doc.userName2?"btn flex  hover:text-green-300 truncate justify-center lg:w-[300px] w-[80px]  p-1 px-4 rounded-2xl bg-blue-950 font-bold text-white ":"btn flex justify-center truncate hover:text-green-300 lg:w-[300px] w-[80px] p-1 px-4 rounded-2xl bg-blue-900 text-white "
                     }
                     >{item._doc.userName2}{item.count && <span className='text-red-600 text-2xl font-bold'>
                       *</span>}</button>

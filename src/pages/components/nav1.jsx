@@ -155,7 +155,7 @@ function Nav1() {
             ))}
           {localStorage.getItem("user") &&
             localStorage.getItem("user") != "9999" && (
-              <div className="flex gap-1 justify-center items-center bg-blue-900 text-white font-bold p-1 py-[6px]  w-auto rounded-full top-[94vh] lg:bottom-1 left-1 fixed text-center   px-[10px] hover:bg-blue-800">
+              <div className="flex gap-1 justify-center items-center bg-blue-900 text-white font-bold p-1 py-[6px]  w-auto rounded-full top-[92vh] lg:bottom-1 left-1 fixed text-center   px-[10px] hover:bg-blue-800">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
