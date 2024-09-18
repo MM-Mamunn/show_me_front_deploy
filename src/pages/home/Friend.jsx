@@ -187,7 +187,7 @@ function Friends() {
             {found == 1 && (
               <>
                 <div className="line min-w-[40vw] m-2 border-2 border-black"></div>
-                <div className="fnd ml-[200px] mt-3">
+                <div className="fnd lg:ml-[200px] mt-3">
                   <button
                     onClick={handleAdd}
                     className="btn no-scrollbar max-w-[20vw] max-h-[40vh] overflow-y-auto overflow-x-clip break-words ml-5 bg-blue-800 text-white   font-serif font-bold min-w-[20vw] m-auto rounded-lg p-2 "
