@@ -8,6 +8,8 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
   const [code, setcode] = useState(0);
   const [refresh, setrefresh] = useState(0);
   const scrollRef = useRef(null);
+  //loading  == 5 means one msg is being send
+  const [loading, setloading] = useState(0);
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -130,6 +132,7 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
     fetchall();
   };
   const handleText = async () => {
+    setloading(5);
     let xx = parseInt(hash, 10);
     const shiftedString = shiftString(text, xx);
 
@@ -149,10 +152,11 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
     await delay(100);
     fetchall();
     settext("");
+    setloading(0);
   };
   return (
     <>
-     {hash == -1 && (
+      {hash == -1 && (
         <div className="pt-[70px] min-h-[99vh]  bg-blue-50">
           <div className="flex justify-center items-center container max-w-[70vw]  lg:max-w-[50vw] h-[50vh] lg:h-[63vh] bg-blue-300 m-auto p-3 rounded-3xl">
             <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
@@ -224,41 +228,57 @@ function Chatbox({ chatFriend, sharedstate, setsharedstate }) {
                 placeholder="text"
                 className=" mx-[2px] w-[60vw] lg:mx-3 px-2 min-h-[70px] lg:min-w-[70vw]  bg-white rounded-2xl"
               />
-              <button
-                className=" font  w-[70px] h-[70px] p-1 rounded-full flex justify-center items-center text-white px-2 py-1 disabled:bg-blue-900  bg-blue-600"
-                onClick={handleText}
-                disabled={text.length < 1}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  color="#ffffff"
-                  fill="none"
+              {loading != 5 && (
+                <button
+                  className=" font  w-[70px] h-[70px] p-1 rounded-full flex justify-center items-center text-white px-2 py-1 disabled:bg-blue-900  bg-blue-600"
+                  onClick={handleText}
+                  disabled={text.length < 1}
                 >
-                  <path
-                    d="M22 12.5001C22 12.0087 21.9947 11.0172 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C9.90159 20.4836 10.7011 20.4954 11.5 20.4989"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M2 6L8.91302 9.92462C11.4387 11.3585 12.5613 11.3585 15.087 9.92462L22 6"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M22 17.5L14 17.5M22 17.5C22 16.7998 20.0057 15.4915 19.5 15M22 17.5C22 18.2002 20.0057 19.5085 19.5 20"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    color="#ffffff"
+                    fill="none"
+                  >
+                    <path
+                      d="M22 12.5001C22 12.0087 21.9947 11.0172 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C9.90159 20.4836 10.7011 20.4954 11.5 20.4989"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M2 6L8.91302 9.92462C11.4387 11.3585 12.5613 11.3585 15.087 9.92462L22 6"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22 17.5L14 17.5M22 17.5C22 16.7998 20.0057 15.4915 19.5 15M22 17.5C22 18.2002 20.0057 19.5085 19.5 20"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
+
+              {loading == 5 && (
+                <button
+                  className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
+
+                  // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
+                >
+                  <div className="flex items-center justify-center ">
+                    <div className="w-[40px] h-[40px] border-t-4 border-blue-500 border-solid rounded-full animate-spin">
+                      *
+                    </div>
+                  </div>
+                </button>
+              )}
             </div>
           )}
         </div>
