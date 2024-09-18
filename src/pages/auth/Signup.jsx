@@ -11,7 +11,7 @@ function Signup() {
   };
 
   const handleSignup = async (e) => {
-    setloading(1)
+    setloading(1);
     let b = await fetch(
       "https://show-me-back-deploy.vercel.app/api/signup/usercheck/",
       {
@@ -27,22 +27,26 @@ function Signup() {
 
     if (b.message == 1) {
       alert("The Username already taken");
+      setloading(0);
       return;
     }
 
-    let a = await fetch("https://show-me-back-deploy.vercel.app/api/signup/new/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    let a = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/new/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
     a = await a.json();
     if (a) {
       setform({ userName: "", password: "" });
       alert("success");
     }
-    setloading(0)
+    setloading(0);
   };
 
   return (
@@ -95,7 +99,7 @@ function Signup() {
                   className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
                   onClick={handleSignup}
                   disabled={
-                    form.userName.length < 5 || form.password.length < 5 
+                    form.userName.length < 5 || form.password.length < 5
                   }
                   // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
                 >
@@ -109,7 +113,9 @@ function Signup() {
                   // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
                 >
                   <div className="flex items-center justify-center ">
-                    <div className="w-[40px] h-[40px] border-t-4 border-blue-500 border-solid rounded-full animate-spin">*</div>
+                    <div className="w-[40px] h-[40px] border-t-4 border-blue-500 border-solid rounded-full animate-spin">
+                      *
+                    </div>
                   </div>
                 </button>
               )}
