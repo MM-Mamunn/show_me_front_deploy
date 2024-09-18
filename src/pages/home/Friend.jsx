@@ -6,6 +6,7 @@ function Friends() {
   const [searchbox, setsearchbox] = useState("");
   const [found, setfound] = useState(-1);
   //laoding == 6 means frnd loading
+  //loading == 7 means searching
   const [loading, setloading] = useState(0);
 
   useEffect(() => {
@@ -60,6 +61,7 @@ function Friends() {
   };
 
   const handleSearch = async () => {
+    setloading(7);
     let user = localStorage.getItem("user");
     if (user == searchbox) {
       setfound(0);
@@ -86,6 +88,7 @@ function Friends() {
 
     if (b2.message == 1) {
       alert("Already Friends");
+      setloading(0);
       return;
     }
 
@@ -108,8 +111,10 @@ function Friends() {
 
     if (b.message == 1) {
       setfound(1);
+      setloading(0);
       return;
     } else setfound(0);
+    setloading(0);
   };
 
   return (
@@ -117,7 +122,7 @@ function Friends() {
       <Nav1 />
       <div className="bg-blue-50 m-0 lg:p-2 h-[88vh]">
         <div className="flex justify-between m-2">
-          <div className="container border-2 lg:h-[60vh] h-[35vh] border-blue-950 w-[50vw] lg:w-[50vw] m-1 lg:m-3 bg-blue-300  pt-[60px] rounded-3xl">
+          <div className="container border-2 lg:min-h-[60vh] min-h-[35vh] border-blue-950 w-[50vw] lg:w-[50vw] m-1 lg:m-3 bg-blue-300  pt-[60px] rounded-3xl">
             <div className="flex justify-center items-center ">
               {/* card */}
 
@@ -143,22 +148,37 @@ function Friends() {
                   ) : (
                     ""
                   )}
-                  <button
-                    className="border-2 mb-[2px] border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
-                    onClick={handleSearch}
-                    disabled={searchbox.length < 5}
-                    // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
-                  >
-                    search
-                  </button>
+                  {loading != 7 && (
+                    <button
+                      className="border-2 mb-[2px] border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
+                      onClick={handleSearch}
+                      disabled={searchbox.length < 5}
+                      // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
+                    >
+                      search
+                    </button>
+                  )}
+                  {loading == 7 && (
+                    <button
+                      className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
+
+                      // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
+                    >
+                      <div className="flex items-center justify-center ">
+                        <div className="w-[40px] h-[40px] border-t-4 border-blue-500 border-solid rounded-full animate-spin">
+                          *
+                        </div>
+                      </div>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
             {found == 0 && (
               <>
                 <div className="line min-w-[40vw] m-2 border-2 border-black"></div>
-                <div className="fnd ml-[200px] mt-3">
-                  <button className="btn no-scrollbar max-w-[20vw] max-h-[40vh] overflow-y-auto overflow-x-clip break-words ml-5 bg-blue-800 text-white   font-serif font-bold min-w-[20vw] m-auto rounded-lg p-2">
+                <div className="fnd lg:ml-[200px] mt-3">
+                  <button className="btn no-scrollbar max-w-[45vw] lg:max-w-[20vw] max-h-[40vh] overflow-y-auto overflow-x-clip break-words ml-[2vw] lg:ml-5 bg-blue-800 text-white   font-serif font-bold min-w-[20vw] m-auto rounded-lg p-2">
                     {searchbox} Not Found
                   </button>
                 </div>
