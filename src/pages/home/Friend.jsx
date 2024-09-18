@@ -65,6 +65,7 @@ function Friends() {
     let user = localStorage.getItem("user");
     if (user == searchbox) {
       setfound(0);
+      setloading(0)
       return;
     }
     ///check already frnds or not
