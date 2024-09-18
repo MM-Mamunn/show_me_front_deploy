@@ -23,19 +23,23 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
-    setloading(2)
-    let b = await fetch("https://show-me-back-deploy.vercel.app/api/signup/login/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    setloading(2);
+    let b = await fetch(
+      "https://show-me-back-deploy.vercel.app/api/signup/login/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
     b = await b.json();
     console.log(b.message);
 
     if (b.message == 0) {
       alert("Invalid Username or password");
+      setloading(0);
       return;
     } else {
       // localStorage.setItem("secret", hash);
@@ -43,8 +47,8 @@ function Login() {
       navigate("/");
       window.location.href = "/";
     }
-    
-    setloading(0)
+
+    setloading(0);
   };
   return (
     <>
@@ -91,7 +95,6 @@ function Login() {
               ) : (
                 ""
               )}
-       
 
               {loading == 0 && (
                 <button
