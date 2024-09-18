@@ -5,9 +5,12 @@ function Friends() {
   const [friends, setFriends] = useState([]);
   const [searchbox, setsearchbox] = useState("");
   const [found, setfound] = useState(-1);
+  //laoding == 6 means frnd loading
+  const [loading, setloading] = useState(0);
 
   useEffect(() => {
     const fetchFriends = async () => {
+      setloading(6);
       let user = localStorage.getItem("user");
       console.log(user);
 
@@ -16,6 +19,7 @@ function Friends() {
       );
       let data = await response.json();
       setFriends(data);
+      setloading(0);
     };
 
     fetchFriends();
@@ -111,12 +115,14 @@ function Friends() {
   return (
     <>
       <Nav1 />
-      <div className="bg-blue-50 m-0 p-2 h-[88vh]">
-        <div className="flex justify-around m-2">
-          <div className="container border-2 border-blue-950 max-w-[50vw] m-3 bg-blue-300  pt-[60px] rounded-3xl">
+      <div className="bg-blue-50 m-0 lg:p-2 h-[88vh]">
+        <div className="flex justify-between m-2">
+          <div className="container border-2 lg:h-[60vh] h-[35vh] border-blue-950 w-[50vw] lg:w-[50vw] m-1 lg:m-3 bg-blue-300  pt-[60px] rounded-3xl">
             <div className="flex justify-center items-center ">
-              <div className="container2 bg-blue-200 py-4 px-2 inline-block rounded-2xl">
-                <div className="inputs flex flex-col justify-center gap-2 items-center">
+              {/* card */}
+
+              <div className="container2 bg-blue-200 py-[2px] lg:py-8 px-[2px] lg:px-2 inline-block rounded-2xl">
+                <div className="inputs w-[45vw] flex flex-col justify-center gap-2 items-center">
                   <h2 className="font-bold text-slate-700">Search User</h2>
                   <input
                     name="Search"
@@ -124,7 +130,7 @@ function Friends() {
                     onChange={handleChange}
                     type="text"
                     placeholder="Search"
-                    className="mx-2 px-1 min-h-[70px] min-w-[400px] my-1 bg-white rounded-2xl"
+                    className="mx-2 lg:px-1 px-[2px] min-h-[70px] w-[40vw] lg:w-[400px] my-1 bg-white rounded-2xl"
                   />
                   {searchbox.length < 5 ? (
                     searchbox.length >= 1 ? (
@@ -138,7 +144,7 @@ function Friends() {
                     ""
                   )}
                   <button
-                    className="border-2  border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
+                    className="border-2 mb-[2px] border-blue-950 text-white px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
                     onClick={handleSearch}
                     disabled={searchbox.length < 5}
                     // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
@@ -175,32 +181,46 @@ function Friends() {
           <div className="line min-h-[25vh]  border-2 border-blue-800"></div>
           <div className="extra">
             <div className="pt-3">
-              <div className="container  min-h-[80vh] min-w-[20vw] max-w-[40vw]  bg-blue-300 rounded-3xl px-2">
+              <div className="container  min-h-[80vh] min-w-[20vw] max-w-[40vw]  bg-blue-300 rounded-3xl px-[1px] lg:px-2">
                 <h2 className="text-blue-900 font-bold ml-5">Friends</h2>
-                <div className="line  m-2 border-2 border-black"></div>
-                <div className="scrl h-[68vh]  overflow-y-scroll no-scroll scrollbar-thin scrollbar-thumb-blue-700  scrollbar-track-gray-200">
-                  {friends?.map((item, index) => (
-                    <div>
-                      <div className="flex">
-                        <div
-                          key={index}
+                <div className="line m-2 border-2 border-black"></div>
+                {loading != 6 && (
+                  <div className="scrl h-[68vh]  overflow-y-scroll no-scroll scrollbar-thin scrollbar-thumb-blue-700  scrollbar-track-gray-200">
+                    {friends?.map((item, index) => (
+                      <div key={index}>
+                        <div className="flex">
+                          {/* <div
                           className="circle h-[50px] w-[50px] text-center bg-green-900 text-white rounded-full p-1"
                         >
                           {index + 1}
+                          </div> */}
+                          <button className="btn truncate  lg:ml-2 bg-blue-800 text-white font-serif font-bold w-[24vw] lg:w-[20vw] m-auto  rounded-lg p-[2px] lg:p-2 ">
+                            {item._doc.userName2}
+                          </button>
                         </div>
-                        <button className="btn truncate  ml-2 bg-blue-800 text-white font-serif font-bold w-[20vw] m-auto rounded-lg p-2 ">
-                          {item._doc.userName2}
-                        </button>
+                        <div className="line mr-[9px] ml-[75px] min-w-[5vw] mb-[2px] border-2 border-blue-950"></div>
                       </div>
-                      <div className="line mr-[9px] ml-[75px] min-w-[5vw] mb-[2px] border-2 border-blue-950"></div>
+                    ))}
+                    {!friends.length && (
+                      <div className="font-bold text-3xl opacity-30 text-blue-900">
+                        No Friend Yet
+                      </div>
+                    )}
+                  </div>
+                )}
+                {loading == 6 && (
+                  <button
+                    className="border-2  border-blue-950 text-white mt-[30vh] ml-[7vw] px-2 py-1 disabled:bg-blue-900 rounded-lg bg-blue-600"
+
+                    // className="bg-green-900 disabled:bg-green-950 hover:bg-green-800 text-white rounded-2xl h-[60px] py-2 px-3 mt-[9px]"
+                  >
+                    <div className="flex items-center justify-center ">
+                      <div className="w-[40px] h-[40px] border-t-4 border-blue-500 border-solid rounded-full animate-spin">
+                        *
+                      </div>
                     </div>
-                  ))}
-                  {!friends.length && (
-                    <div className="font-bold text-3xl opacity-30 text-blue-900">
-                      No Friend Yet
-                    </div>
-                  )}
-                </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
